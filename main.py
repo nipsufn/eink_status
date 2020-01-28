@@ -20,8 +20,8 @@ matplotlib.use('Agg')
 config = None
 with open("config.json", 'r') as configFile:
     config = json.load(configFile)
-    
-kelvinOffset = config["kelvinOffset"]
+
+kelvinOffset = float(config["kelvinOffset"])
 forecastLocation = config["forecastLocation"]
 forecastToken = config["forecastToken"]
 weatherLocations = config["weatherLocations"]
@@ -37,7 +37,7 @@ def elvis(a, b):
 def getJsonFromUrl(url, timeout=10):
     try:
         response = requests.get(url, timeout=timeout)
-        r.raise_for_status()
+        response.raise_for_status()
     except requests.exceptions.ConnectionError as error:
         print("HTTP connection error!\n"+str(error))
         return None
@@ -51,12 +51,12 @@ def getJsonFromUrl(url, timeout=10):
         print("Undefined error!\n")
         return None
     return json.loads(response.content)
-    
+
 def stop():
     epd.init();
     epd.sleep();
     exit();
-    
+
 signal(SIGINT, stop)
 if __name__ == "__main__":
     counter = 0
@@ -70,7 +70,7 @@ if __name__ == "__main__":
     jazzJson1 = None
     jazzJson2 = None
     forecastPlotImage = Image.new('RGB', (720, 200), (0xFF, 0xFF, 0xFF))
-    
+
     while True:
         epd.init()
         jazzJson1 = elvis(getJsonFromUrl("https://croapi.cz/data/v2/schedule/now/1/jazz.json"), jazzJson1)
