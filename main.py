@@ -50,7 +50,12 @@ def getJsonFromUrl(url, timeout=10):
     if response.content == None:
         print("Undefined error!\n")
         return None
-    return json.loads(response.content)
+    try:
+        return json.loads(response.content)
+    except json.decoder.JSONDecodeError as error:
+        print("JSON parsing error!\n"+str(error))
+        return None
+    return None
 
 def stop():
     epd.init();
