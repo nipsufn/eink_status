@@ -2,6 +2,7 @@
 
 import logging
 import argparse
+import json
 import classes.Airly
 import classes.CRoJazz
 import classes.OpenWeatherMap
