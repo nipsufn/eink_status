@@ -39,8 +39,8 @@ class Airly(JSONFromAPI):
     
     def isAirOK(self):
         status = True
-        if self.pm100 - self.pm100_limit > 0:
+        if self.pm100 > self.pm100_limit:
             status = False
-        if self.pm025 - self.pm025_limit > 0:
+        if self.pm025 > self.pm025_limit:
             status = False
         return status
