@@ -6,8 +6,6 @@ import classes.Airly
 import classes.CRoJazz
 import classes.OpenWeatherMap
 
-import requests
-import json
 import matplotlib
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates

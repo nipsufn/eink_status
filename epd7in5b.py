@@ -51,6 +51,7 @@
 import epdconfig
 from PIL import Image
 import RPi.GPIO as GPIO
+import logging
 
 class Epd:
     # Display resolution
@@ -162,6 +163,8 @@ class Epd:
                             }
                          
     def __init__(self):
+        self.logger = logging.getLogger('eink_status.epd7in5b')
+        self.logger.debug('__init__')
         self.reset_pin = epdconfig.RST_PIN
         self.dc_pin = epdconfig.DC_PIN
         self.busy_pin = epdconfig.BUSY_PIN
@@ -184,10 +187,10 @@ class Epd:
         epdconfig.spi_writebyte([data])
         
     def wait_until_idle(self):
-        print("e-Paper busy")
+        self.logger.debug("e-Paper busy")
         while(epdconfig.digital_read(self.busy_pin) == 0):      # 0: busy, 1: idle
             epdconfig.delay_ms(100)
-        print("e-Paper busy release")
+        self.logger.debug("e-Paper busy release")
             
     def init(self):
         if (epdconfig.module_init() != 0):
