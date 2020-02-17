@@ -277,6 +277,6 @@ class Epd:
     def sleep(self):
         self.send_command(self.PowerOff)
         self.wait_until_idle()
-        #self.send_command(self.DeepSleep)
-        #self.send_data(0xA5)
+        self.send_command(self.DeepSleep)
+        self.send_data(0xA5)
 

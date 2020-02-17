@@ -43,9 +43,9 @@ if __name__ == "__main__":
     logger.addHandler(log_handler)
     logger.setLevel(logging.DEBUG)
     parser = argparse.ArgumentParser()
-    parser.add_argument("-i", "--image", type=str, 
+    parser.add_argument("-i", "--image", type=str,
         help="save to image")
-    parser.add_argument("-n", "--no-eink", action="store_true", 
+    parser.add_argument("-n", "--no-eink", action="store_true",
         help="don't use e-ink display")
     args = parser.parse_args()
     counter = 0
@@ -122,7 +122,7 @@ if __name__ == "__main__":
                 tmpSunset = weather_forecast.sunset + i*86400
                 tmpSunrise = weather_forecast.sunrise + (i+1)*86400
                 sunset = 0
-                if (tmpSunset < xAxisTimestamps[-1] 
+                if (tmpSunset < xAxisTimestamps[-1]
                     and tmpSunset > xAxisTimestamps[0]):
                     sunset = tmpSunset
                 else:
@@ -133,7 +133,7 @@ if __name__ == "__main__":
                         sunset = xAxisTimestamps[0]
 
                 sunrise = 0
-                if (tmpSunrise < xAxisTimestamps[-1] 
+                if (tmpSunrise < xAxisTimestamps[-1]
                     and tmpSunrise > xAxisTimestamps[0]):
                     sunrise = tmpSunrise
                 else:
@@ -147,7 +147,7 @@ if __name__ == "__main__":
                 nightTimestamps.append([sunset, sunrise])
                 i += 1
                 if breakout:
-                    break 
+                    break
 
             for nightTimestamp in nightTimestamps:
                 ax2.axvspan(
@@ -182,7 +182,7 @@ if __name__ == "__main__":
             #canvas = plt.get_current_fig_manager().canvas
             forecastCanvas = tempAndPercipPlot.canvas
             forecastCanvas.draw()
-            forecastPlotImage = Image.frombytes('RGB', 
+            forecastPlotImage = Image.frombytes('RGB',
                 forecastCanvas.get_width_height(),
                 forecastCanvas.tostring_rgb())
             #clean up
@@ -252,12 +252,12 @@ if __name__ == "__main__":
 
         #sanitize image palette
         framebufferImage = framebufferImage.quantize(palette=PaletteImage)
-        
+
         if args.image:
             framebufferImage.save(args.image);
         if not args.no_eink:
             epd.Display(framebufferImage)
-            epd.sleep()
+            #epd.sleep()
         counter = counter + 1
         time.sleep(60)
 
