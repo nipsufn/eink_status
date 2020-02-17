@@ -9,8 +9,8 @@ class OpenWeatherMap(JSONFromAPI):
         self.__location = location
         self.__token = token
         self.json = None
-        self.sunrise = None
-        self.sunset = None
+        self.sunrise = ""
+        self.sunset = ""
         self.update()
         
     def update(self):
@@ -21,6 +21,8 @@ class OpenWeatherMap(JSONFromAPI):
             + self.__token
             )
         tmp_json = self._get_json_from_url(tmp_url)
-        self.json = tmp_json if tmp_json is not None else self.json
+        if tmp_json is None:
+            return
+        self.json = tmp_json
         self.sunrise = tmp_json['city']['sunrise']
         self.sunset = tmp_json['city']['sunset']
