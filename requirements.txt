@@ -2,3 +2,4 @@ spidev
 RPi.GPIO
 PIL
 requests
+inspect

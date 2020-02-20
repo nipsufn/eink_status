@@ -1,6 +1,6 @@
 # Airly.py
 import logging
-import instpect
+import inspect
 
 from classes.JSONFromAPI import JSONFromAPI
 
