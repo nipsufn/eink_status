@@ -1,5 +1,7 @@
 # Airly.py
 import logging
+import instpect
+
 from classes.JSONFromAPI import JSONFromAPI
 
 class Airly(JSONFromAPI):
@@ -40,7 +42,9 @@ class Airly(JSONFromAPI):
     def isAirOK(self):
         status = True
         if self.pm100 > self.pm100_limit:
+            self.logger.debug(str(inspect.currentframe().f_back.f_lineno)+": PM10 > PM10_norm")
             status = False
         if self.pm025 > self.pm025_limit:
+            self.logger.debug(str(inspect.currentframe().f_back.f_lineno)+": PM2.5 > PM2.5_norm")
             status = False
         return status
