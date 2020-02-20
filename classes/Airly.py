@@ -35,8 +35,8 @@ class Airly(JSONFromAPI):
             self.pm100 = tmp_json['current']['values'][2]['value']
             self.pm025 = tmp_json['current']['values'][1]['value']
             self.pm001 = tmp_json['current']['values'][0]['value']
-            self.pm100_limit = tmp_json['current']['standards'][1]['percent']
-            self.pm025_limit = tmp_json['current']['standards'][0]['percent']
+            self.pm100_limit = tmp_json['current']['standards'][1]['limit']
+            self.pm025_limit = tmp_json['current']['standards'][0]['limit']
             self.temp = tmp_json['current']['values'][5]['value']
     
     def isAirOK(self):
