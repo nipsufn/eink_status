@@ -27,9 +27,9 @@ class CRoJazz(JSONFromAPI):
             return
         self.track_artist = (
             tmp_json['data']['interpret'] if 'interpret' in tmp_json['data']
-            else "N\A"
+            else "N\\A"
             )
         self.track_title = (
             tmp_json['data']['track'] if 'track' in tmp_json['data']
-            else "N\A"
+            else "N\\A"
             )

@@ -26,9 +26,9 @@ with open("config.json", 'r') as configFile:
     config = json.load(configFile)
 
 def stop(singalNumber, frame):
-    epd.init();
-    epd.sleep();
-    exit();
+    epd.init()
+    epd.sleep()
+    exit()
 
 signal(SIGINT, stop)
 
@@ -254,7 +254,7 @@ if __name__ == "__main__":
         framebufferImage = framebufferImage.quantize(palette=PaletteImage)
 
         if args.image:
-            framebufferImage.save(args.image);
+            framebufferImage.save(args.image)
         if not args.no_eink:
             epd.Display(framebufferImage)
             #epd.sleep()
