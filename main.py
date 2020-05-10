@@ -102,7 +102,7 @@ def draw(config, epd, args, logger):
 
         # sanitize image palette
         framebuffer_image = framebuffer_image.quantize(
-            Image.open('palette_bwr_bodge.bmp'))
+            palette=Image.open('palette_bwr_bodge.bmp'))
         if update_display:
             if args.image:
                 framebuffer_image.save(args.image)
