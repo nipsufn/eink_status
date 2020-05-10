@@ -98,7 +98,8 @@ class OpenWeatherMap(JSONFromAPI):
 
         #process forecast data
         matplotlib.use('Agg')
-        matplotlib.rcParams['savefig.pad_inches'] = 0
+        forecast_plot_image = Image.new('RGB', (x_resolution, y_resolution),
+                                        (0xFF, 0xFF, 0xFF))
 
         x_axis_timestamps = []
         x_axis_hours = []

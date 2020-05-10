@@ -1,9 +1,15 @@
 # c_ro_jazz.py
+"""This module queries croapi.cz and provides retrieved data
+"""
 import logging
 from classes.json_from_api import JSONFromAPI
 
 class CRoJazz(JSONFromAPI):
+    """This class queries croapi.cz and provides retrieved data
+    """
     def __init__(self):
+        """Class constructor
+        """
         super(CRoJazz, self).__init__()
         self.logger = logging.getLogger('eink_status.CRoJazz')
         self.logger.debug('__init__')
@@ -16,6 +22,8 @@ class CRoJazz(JSONFromAPI):
         self.update()
 
     def update(self):
+        """Update programme data
+        """
         tmp_url = "https://croapi.cz/data/v2/schedule/now/1/jazz.json"
         tmp_json = self._get_json_from_url(tmp_url)
         if tmp_json is None:
@@ -33,7 +41,7 @@ class CRoJazz(JSONFromAPI):
         tmp_json = self._get_json_from_url(tmp_url)
         if tmp_json is None:
             return
-            
+
         tmp_string = (
             tmp_json['data']['interpret'] if 'interpret' in tmp_json['data']
             else "N\\A")
@@ -43,6 +51,6 @@ class CRoJazz(JSONFromAPI):
         tmp_string = (
             tmp_json['data']['track'] if 'track' in tmp_json['data']
             else "N\\A")
-        if tmp_string !=  self.track_title:
-             self.track_title = tmp_string
-             self.changed = True
+        if tmp_string != self.track_title:
+            self.track_title = tmp_string
+            self.changed = True
