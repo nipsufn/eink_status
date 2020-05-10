@@ -1,4 +1,4 @@
-# JSONFromAPI.py
+# json_from_api.py
 import logging
 import requests
 import json
@@ -7,6 +7,7 @@ class JSONFromAPI:
     def __init__(self):
         self.logger = logging.getLogger('eink_status.JSONFromAPI')
         self.logger.debug('__init__')
+        
     def _get_json_from_url(self, url, timeout=10):
         try:
             response = requests.get(url, timeout=timeout)

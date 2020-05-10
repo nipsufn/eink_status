@@ -1,8 +1,8 @@
-# Airly.py
+# airly.py
 import logging
 import inspect
 
-from classes.JSONFromAPI import JSONFromAPI
+from classes.json_from_api import JSONFromAPI
 
 class Airly(JSONFromAPI):
     def __init__(self, locationList, token):
