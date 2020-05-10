@@ -105,9 +105,11 @@ def draw(config, epd, args, logger):
             palette=Image.open('palette_bwr_bodge.bmp'))
         if update_display:
             if args.image:
+                #framebuffer_image = framebuffer_image.rotate(90, expand=True)
                 framebuffer_image.save(args.image)
             if not args.no_eink:
-                epd.Display(framebuffer_image.rotate(90))
+                framebuffer_image = framebuffer_image.rotate(90, expand=True)
+                epd.Display(framebuffer_image)
                 #epd.sleep()
         counter = counter + 1
         time.sleep(60)
