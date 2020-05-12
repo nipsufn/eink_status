@@ -63,7 +63,7 @@ def draw(config, epd, args, logger):
             # those are updated infrequently, no point spamming APIs
             weather_forecast.update()
             smog_status.update()
-            forecast_plot_image = weather_forecast.plot(430, 200)
+            forecast_plot_image = weather_forecast.plot(420, 200)
             update_display = True
 
         framebuffer_font_big = ImageFont.truetype('SourceCodePro-Regular.ttf',
@@ -72,7 +72,7 @@ def draw(config, epd, args, logger):
                                                     12)
 
         framebuffer_image = Image.new('RGB', (385, 640), (0xFF, 0xFF, 0xFF))
-        framebuffer_image.paste(forecast_plot_image, (-25, 430))
+        framebuffer_image.paste(forecast_plot_image, (-15, 430))
         framebuffer_draw = ImageDraw.Draw(framebuffer_image)
         framebuffer_draw.text((10, 0),
                               datetime.now().strftime('%Y-%m-%d'),
