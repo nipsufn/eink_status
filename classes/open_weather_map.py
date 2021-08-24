@@ -63,6 +63,8 @@ class OpenWeatherMap(JSONFromAPI):
                     sunrise = x_axis_timestamps[0]
 
             night_timestamps.append([sunset, sunrise])
+            self.logger.debug("sunset: " + datetime.fromtimestamp(sunset).strftime('%Y-%m-%d %H:%M') \
+                + "; sunrise: " + datetime.fromtimestamp(sunrise).strftime('%Y-%m-%d %H:%M'))
             i += 1
             if breakout or (days != 0 and i > days):
                 break
@@ -106,6 +108,7 @@ class OpenWeatherMap(JSONFromAPI):
         y_axis_temperature = []
         y_axis_precipitation = []
         for timestamp in self.json['list']:
+            self.logger.debug("timestamp: " + datetime.fromtimestamp(timestamp['dt']).strftime('%Y-%m-%d %H:%M'))
             x_axis_timestamps.append(timestamp['dt'])
             x_axis_hours.append(datetime.fromtimestamp(timestamp['dt']))
             y_axis_temperature.append(timestamp['main']['temp']-273.15)
@@ -120,7 +123,7 @@ class OpenWeatherMap(JSONFromAPI):
                                                   y_resolution/80),
                                          dpi=80)
         #plot precipitation
-        ax1 = temp_n_percip_plot.add_subplot()
+        ax1 = temp_n_percip_plot.add_subplot(111)
         ax1.plot(x_axis_hours, y_axis_precipitation, color='black')
         ax1.fill_between(x_axis_hours, 0, y_axis_precipitation, color='black')
         ax1.set_ylim(bottom=0)

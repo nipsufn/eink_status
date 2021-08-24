@@ -67,12 +67,12 @@ def draw(config, epd, args, logger):
             update_display = True
 
         framebuffer_font_big = ImageFont.truetype('SourceCodePro-Regular.ttf',
-                                                  20)
+                                                  40)
         framebuffer_font_small = ImageFont.truetype('SourceCodePro-Regular.ttf',
                                                     12)
 
         framebuffer_image = Image.new('RGB', (385, 640), (0xFF, 0xFF, 0xFF))
-        framebuffer_image.paste(forecast_plot_image, (-15, 430))
+        framebuffer_image.paste(forecast_plot_image, (-20, 430))
         framebuffer_draw = ImageDraw.Draw(framebuffer_image)
         framebuffer_draw.text((10, 0),
                               datetime.now().strftime('%Y-%m-%d'),
@@ -81,23 +81,26 @@ def draw(config, epd, args, logger):
         text_line = ('ČRoJazz: '+ cro_jazz.programme_title + ": "
                      + cro_jazz.programme_start + " - "
                      + cro_jazz.programme_stop)
-        framebuffer_draw.text((10, 25), text_line,
+
+        top_offset = 45
+
+        framebuffer_draw.text((10, top_offset), text_line,
                               font=framebuffer_font_small, fill=0)
 
         text_line = ('    ' + cro_jazz.track_artist + " - "
                      + cro_jazz.track_title)
-        framebuffer_draw.text((10, 25+16), text_line,
+        framebuffer_draw.text((10, top_offset+16), text_line,
                               font=framebuffer_font_small, fill=0)
 
         text_line = ('Smog:    ' + str(smog_status.pm001) + "/"
                      + str(smog_status.pm025) + "/" + str(smog_status.pm100))
 
         dust_string_color = (0, 0, 0) if smog_status.is_air_ok() else (255, 0, 0)
-        framebuffer_draw.text((10, 25+16*2), text_line,
+        framebuffer_draw.text((10, top_offset+16*2), text_line,
                               font=framebuffer_font_small,
                               fill=dust_string_color)
         text_line = 'Temp:    '+str(smog_status.temp)+"°"
-        framebuffer_draw.text((10, 25+16*3), text_line,
+        framebuffer_draw.text((10, top_offset+16*3), text_line,
                               font=framebuffer_font_small, fill=0)
 
         # sanitize image palette
@@ -110,6 +113,7 @@ def draw(config, epd, args, logger):
             if not args.no_eink:
                 framebuffer_image = framebuffer_image.rotate(90, expand=True)
                 epd.Display(framebuffer_image)
+                logger.debug("display updated")
                 #epd.sleep()
         counter = counter + 1
         time.sleep(60)

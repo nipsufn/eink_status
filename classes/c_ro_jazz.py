@@ -26,7 +26,10 @@ class CRoJazz(JSONFromAPI):
         """
         tmp_url = "https://croapi.cz/data/v2/schedule/now/1/jazz.json"
         tmp_json = self._get_json_from_url(tmp_url)
+        self.changed = False
         if tmp_json is None:
+            return
+        if tmp_json['data'] == []:
             return
         if tmp_json['data'][0]['title'] != self.programme_title:
             self.programme_title = tmp_json['data'][0]['title']

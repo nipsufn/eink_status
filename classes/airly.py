@@ -44,12 +44,14 @@ class Airly(JSONFromAPI):
                 continue
             if tmp_json['current']['indexes'][0]['value'] is None:
                 continue
+            self.logger.debug(location)
             self.pm100 = tmp_json['current']['values'][2]['value']
             self.pm025 = tmp_json['current']['values'][1]['value']
             self.pm001 = tmp_json['current']['values'][0]['value']
             self.pm100_limit = tmp_json['current']['standards'][1]['limit']
             self.pm025_limit = tmp_json['current']['standards'][0]['limit']
             self.temp = tmp_json['current']['values'][5]['value']
+            break
 
     def is_air_ok(self):
         """Check if smog is within EU norms

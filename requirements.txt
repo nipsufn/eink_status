@@ -1,5 +1,5 @@
 spidev
 RPi.GPIO
-PIL
+Pillow
 requests
-inspect
+matplotlib
