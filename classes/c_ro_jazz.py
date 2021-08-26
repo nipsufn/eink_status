@@ -24,7 +24,7 @@ class CRoJazz(JSONFromAPI):
     def update(self):
         """Update programme data
         """
-        tmp_url = "https://croapi.cz/data/v2/schedule/now/1/jazz.json"
+        tmp_url = "https://api.rozhlas.cz/data/v2/playlist/now/jazz.json"
         tmp_json = self._get_json_from_url(tmp_url)
         self.changed = False
         if tmp_json is None:
